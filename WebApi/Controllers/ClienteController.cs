@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System;
+using Manager.Interfaces;
+using System.Threading.Tasks;
 
 namespace WebApi.Controllers
 {
@@ -9,24 +11,29 @@ namespace WebApi.Controllers
     [ApiController]
     public class ClienteController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Get()
+        private readonly IClienteManager clienteManager;
+        public ClienteController(IClienteManager clienteManager)
         {
-            var clientes = new List<Cliente>
-            {
-                new Cliente{
-                    Id = 1,
-                    Nome = "José",
-                    DataNascimento = new DateTime(1994,11,24)
-                    },
-                new Cliente{
-                    Id = 2,
-                    Nome = "Maria",
-                    DataNascimento = new DateTime(2010,05,10)
-                    },
-            };
+            this.clienteManager = clienteManager;
+        }
 
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var clientes = await clienteManager.GetClientesAsync();
             return Ok(clientes);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var cliente = await clienteManager.GetClienteById(id);
+
+            if (cliente == null)
+                return NotFound(new { message = "Cliente não encontrado!" });
+
+            return Ok(cliente);
+        }
+
     }
 }
