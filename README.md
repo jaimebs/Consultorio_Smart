@@ -15,6 +15,8 @@ O projeto esta separado por outros projetos e pastas:
 - Microsoft.EntityFrameworkCore.Tools (5.0.14) - Biblioteca que habilita comandos no console para a geração das migrations.
 - Microsoft.EntityFrameworkCore.SqlServer (5.0.14) - Biblioteca para ter acesso e manipular o banco de dados SQL SERVER.
 - FluentValidation.AspNetCore (10.3.6) - Biblioteca de validação para .NET que usa uma interface fluente e expressões lambdas para criar regras de validação distribuída.
+- AutoMapper (11.0.1) - Biblioteca construída para resolver o mapeamento de um objeto para outro (DTO).
+- AutoMapper.Extensions.Microsoft.DependencyInjection (11.0.0) - Biblioteca para efetuar a injeção de dependência do AutoMapper.
 
 ### Conexão com banco de dados
 No projeto WebApi no arquivo appsettings.json, incluir a string de conexão conforme exemplo abaixo:
