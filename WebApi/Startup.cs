@@ -3,6 +3,7 @@ using Data.Repository;
 using FluentValidation.AspNetCore;
 using Manager.Implementation;
 using Manager.Interfaces;
+using Manager.Mappings;
 using Manager.Validator;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,13 +31,17 @@ namespace WebApi
             services.AddDbContext<CsContext>(options => options.UseSqlServer(Configuration.GetConnectionString("dbConnection")));
 
             services.AddControllers()
+                .AddNewtonsoftJson()
                 .AddFluentValidation(p =>
                 {
-                    p.RegisterValidatorsFromAssemblyContaining<ClienteValidator>();
+                    p.RegisterValidatorsFromAssemblyContaining<NovoClienteValidator>();
+                    p.RegisterValidatorsFromAssemblyContaining<AlteraClienteValidator>();
                     p.ValidatorOptions.LanguageManager.Culture = new CultureInfo("pt-BR");
                 });
 
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApi", Version = "v1" }));
+
+            services.AddAutoMapper(typeof(NovoClienteMappingProfile), typeof(AlteraClienteMappingProfile));
 
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IClienteManager, ClienteManager>();

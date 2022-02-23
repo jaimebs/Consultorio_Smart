@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System;
 using Manager.Interfaces;
 using System.Threading.Tasks;
+using Core.ModelViews.Cliente;
 
 namespace WebApi.Controllers
 {
@@ -36,17 +37,25 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Insert(Cliente cliente)
+        public async Task<IActionResult> Insert(NovoCliente novoCliente)
         {
-            var clienteRetornado = await clienteManager.InsertClienteAsync(cliente);
+            try
+            {
+                var clienteRetornado = await clienteManager.InsertClienteAsync(novoCliente);
 
-            return CreatedAtAction(nameof(GetById), new { id = clienteRetornado.Id }, clienteRetornado);
+                return CreatedAtAction(nameof(GetById), new { id = clienteRetornado.Id }, clienteRetornado);
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno da aplicação {ex.Message}");
+            }
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put(Cliente cliente)
+        public async Task<IActionResult> Put(AlteraCliente alteraCliente)
         {
-            var clienteAtualizado = await clienteManager.UpdateClienteAsync(cliente);
+            var clienteAtualizado = await clienteManager.UpdateClienteAsync(alteraCliente);
 
             if (clienteAtualizado == null)
                 return NotFound(new { message = "Cliente não encontrado!" });
