@@ -55,11 +55,10 @@ namespace WebApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Put(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             await clienteManager.DeleteClienteAsync(id);
             return NoContent();
         }
-
     }
 }

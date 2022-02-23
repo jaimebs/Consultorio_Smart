@@ -1,7 +1,9 @@
 using Data.Context;
 using Data.Repository;
+using FluentValidation.AspNetCore;
 using Manager.Implementation;
 using Manager.Interfaces;
+using Manager.Validator;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.Globalization;
 
 namespace WebApi
 {
@@ -25,7 +28,14 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CsContext>(options => options.UseSqlServer(Configuration.GetConnectionString("dbConnection")));
-            services.AddControllers();
+
+            services.AddControllers()
+                .AddFluentValidation(p =>
+                {
+                    p.RegisterValidatorsFromAssemblyContaining<ClienteValidator>();
+                    p.ValidatorOptions.LanguageManager.Culture = new CultureInfo("pt-BR");
+                });
+
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApi", Version = "v1" }));
 
             services.AddScoped<IClienteRepository, ClienteRepository>();
