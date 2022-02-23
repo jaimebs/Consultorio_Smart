@@ -10,10 +10,11 @@ O projeto esta separado por outros projetos e pastas:
 - 05.Tests
 
 ### Pacotes instalados
-- Microsoft.EntityFrameworkCore (5.0.14)
-- Microsoft.EntityFrameworkCore.Design (5.0.14)
-- Microsoft.EntityFrameworkCore.SqlServer (5.0.14)
-- Microsoft.EntityFrameworkCore.Tools (5.0.14)
+- Microsoft.EntityFrameworkCore (5.0.14) - Biblioteca para mapeado relacional de objeto (ORM).
+- Microsoft.EntityFrameworkCore.Design (5.0.14) - Biblioteca que habilita as migrations e outras ferramentas.
+- Microsoft.EntityFrameworkCore.Tools (5.0.14) - Biblioteca que habilita comandos no console para a geração das migrations.
+- Microsoft.EntityFrameworkCore.SqlServer (5.0.14) - Biblioteca para ter acesso e manipular o banco de dados SQL SERVER.
+- FluentValidation.AspNetCore (10.3.6) - Biblioteca de validação para .NET que usa uma interface fluente e expressões lambdas para criar regras de validação distribuída.
 
 ### Conexão com banco de dados
 No projeto WebApi no arquivo appsettings.json, incluir a string de conexão conforme exemplo abaixo:
