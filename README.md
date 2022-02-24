@@ -35,3 +35,7 @@ Para gerar as migrations e logo criar/atualizar a tabela no banco de dados, segu
 ### Instruções para a injeção de dependência
 Para efetuar a injeção de dependência no projeto, depois de criado as interfaces e os respositories, devem ser incluídas no Startup do projeto WebApi, no método *ConfigureServices*.
 > Ex: services.AddScoped<IClienteRepository, ClienteRepository>();
+
+------------
+
+*Feito por Jaime Barbosa - [Linkedin](https://www.linkedin.com/in/jaimebs/ "Linkedin")*
