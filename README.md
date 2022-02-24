@@ -30,7 +30,9 @@ No projeto WebApi no arquivo appsettings.json, incluir a string de conexão conf
 ### Explicação de como gerar as migrations
 Para gerar as migrations e logo criar/atualizar a tabela no banco de dados, segue os comandos abaixo:
 - add-migration **nome_da_migration** (Gera a migration)
-- update-database (Gera a tabela no banco de dados)
+- update-database (Atualiza o banco de dados gerando a estrutura e tabela)
+- remove-migration (Às vezes, você adiciona uma migration e percebe que precisa fazer alterações adicionais ao modelo do EF antes de aplicá-lo para remover a última migration)
+- get-migration (Listar todas as migrations existentes)
 
 ### Instruções para a injeção de dependência
 Para efetuar a injeção de dependência no projeto, depois de criado as interfaces e os respositories, devem ser incluídas no Startup do projeto WebApi, no método *ConfigureServices*.
