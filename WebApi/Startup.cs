@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
 using System.Globalization;
 
 namespace WebApi
@@ -39,7 +40,18 @@ namespace WebApi
                     p.ValidatorOptions.LanguageManager.Culture = new CultureInfo("pt-BR");
                 });
 
-            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApi", Version = "v1" }));
+            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "WebApi",
+                Version = "v1",
+                Description = "API da aplicação Consultorio Smart.",
+                License = new OpenApiLicense
+                {
+                    Name = "OSD",
+                    Url = new Uri("https://opensource.org/osd")
+                },
+                TermsOfService = new Uri("https://opensource.org/osd")
+            }));
 
             services.AddAutoMapper(typeof(NovoClienteMappingProfile), typeof(AlteraClienteMappingProfile));
 
